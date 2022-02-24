@@ -1,0 +1,24 @@
+main{
+    background-color: #4d3b0c;
+}
+.map td{
+    background-size: cover;
+    min-width: 100px;
+    height: 100px;
+    position: relative;
+}
+.map_pos small{
+    color: white;
+    font-size: 10px;
+    box-sizing:content-box;
+    background-color: black;
+    padding: 2px 4px;
+}
+
+.map_pos .bottom_coordinates{
+    position: absolute;
+    bottom: 0px;
+    left: 2.3em;
+}
+
+
