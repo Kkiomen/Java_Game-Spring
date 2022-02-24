@@ -47,7 +47,6 @@ public class MapChunkService {
             iterator++;
             chunks.add(currentChunk);
 
-
             if(iterator == sizeMap){
                 iterator = 0;
                 result.add(new Column(chunks));

@@ -52,27 +52,7 @@
                 </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered map">
-                    <tr th:each="chunkY, y: ${chunks}">
-                        <!--/*@thymesVar id="chunk" type="pl.kkiomen.game.generator.map.Chunks.Chunk"*/-->
-                        <td class="map_pos" th:each="chunk, x: ${chunkY.chunksList}"
-                            th:style="'background:url('+ ${chunk.getUrlImageChunk()} +');'"
-                        >
-                            <div class="asset" style="text-align: center">
-                                <a href="#">
-                                    <img src="https://i.imgur.com/kkRSRu7.png" width="80px"/>
-                                </a>
-                            </div>
-                            <div class="bottom_coordinates">
-                                <a th:href="@{/chunk/x/{x}/y/{y}(x=${chunk.getX()}, y=${chunk.getY()})}">
-                                    <small th:text="${chunk.showCoordinates()}"></small>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+
         </main>
     </body>
 </html>

@@ -6,6 +6,8 @@ import pl.kkiomen.game.exception.NotFoundUser;
 import pl.kkiomen.game.model.User;
 import pl.kkiomen.game.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,14 +22,14 @@ public class UserService {
     public boolean save(UserDto userDto){
         User user = new User();
         user.setEmail(userDto.getEmail());
-        user.setName(userDto.getName());
+        user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setCity(userDto.getCity());
         userRepository.save(user);
         return true;
     }
 
-    private User getEntityById(Long Id){
+    public User getEntityById(Long Id){
         Optional<User> optional = userRepository.findById(Id);
         return optional.orElseGet(() -> userRepository.findById(Id).orElseThrow(NotFoundUser::new));
     }
@@ -37,7 +39,7 @@ public class UserService {
         if(user != null){
             return new UserDto(
                 user.getId(),
-                user.getName(),
+                user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
                 user.getCity()
@@ -48,7 +50,7 @@ public class UserService {
 
     public void update(UserDto userDto){
         User user = getEntityById(userDto.getId());
-        user.setName(userDto.getName());
+        user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setCity(userDto.getCity());
@@ -58,6 +60,22 @@ public class UserService {
     public void delete(Long id) {
         User user = getEntityById(id);
         userRepository.delete(user);
+    }
+
+    public List<User> getAll(){
+        List<User> user = new ArrayList<>();
+        userRepository.findAll().forEach(user::add);
+        return user;
+    }
+
+    public User findByUsername(String username){
+        List<User> users = getAll();
+        for(User user : users){
+            if(user.getUsername().equals(username)){
+                return user;
+            }
+        }
+        return null;
     }
 
 }
