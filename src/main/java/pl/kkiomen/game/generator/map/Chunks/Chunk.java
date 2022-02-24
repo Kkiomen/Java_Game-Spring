@@ -14,6 +14,7 @@ public class Chunk{
     public String name = "";
     private String urlImageChunk = "";
     private BiomeType biome = null;
+    private int numberOfChunk;
 
     public Chunk(int x, int y) {
         this.x = x;
@@ -35,4 +36,10 @@ public class Chunk{
     public BiomeType getBiome() {
         return biome;
     }
+
+    public int getTypeChunk(){
+        return numberOfChunk;
+    }
+
+
 }

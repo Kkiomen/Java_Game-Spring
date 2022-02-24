@@ -18,6 +18,8 @@ public class ChunkGrass extends Chunk implements ChunkInterfece {
     private double speed = 2;
     private String urlImageChunk = "https://i.imgur.com/sdUWEY7.png";
     public String name = "grass";
+    private int numberOfChunk = 1;
+
 
     public ChunkGrass(int x, int y) {
         super(x,y);
@@ -36,5 +38,10 @@ public class ChunkGrass extends Chunk implements ChunkInterfece {
     @Override
     public BiomeType getBiome() {
         return biome;
+    }
+
+    @Override
+    public int getTypeChunk(){
+        return numberOfChunk;
     }
 }

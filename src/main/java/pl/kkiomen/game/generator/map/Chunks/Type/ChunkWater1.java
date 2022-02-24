@@ -15,6 +15,7 @@ public class ChunkWater1 extends Chunk implements ChunkInterfece {
     private double speed = 6;
     private String urlImageChunk = "https://i.imgur.com/JBMfACw.png";
     public String name = "water1";
+    private int numberOfChunk = 8;
 
     public ChunkWater1(int x, int y) {
         super(x, y);
@@ -33,5 +34,10 @@ public class ChunkWater1 extends Chunk implements ChunkInterfece {
     @Override
     public BiomeType getBiome() {
         return biome;
+    }
+
+    @Override
+    public int getTypeChunk(){
+        return numberOfChunk;
     }
 }
