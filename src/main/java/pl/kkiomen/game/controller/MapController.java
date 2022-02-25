@@ -17,6 +17,6 @@ public class MapController {
 
         ArrayList<Column> chunks = MapGenerator.render();
         model.addAttribute("chunks", chunks);
-        return "index";
+        return "map";
     }
 }

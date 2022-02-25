@@ -2,13 +2,13 @@ package pl.kkiomen.game.service;
 
 import org.springframework.stereotype.Service;
 import pl.kkiomen.game.dto.CityDto;
-import pl.kkiomen.game.dto.UserDto;
 import pl.kkiomen.game.exception.NotFoundCity;
-import pl.kkiomen.game.exception.NotFoundUser;
 import pl.kkiomen.game.model.City;
-import pl.kkiomen.game.model.User;
 import pl.kkiomen.game.repository.CityRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -38,6 +38,24 @@ public class CityService {
     private City getEntityById(Long Id){
         Optional<City> optional = cityRepository.findById(Id);
         return optional.orElseGet(() -> cityRepository.findById(Id).orElseThrow(NotFoundCity::new));
+    }
+
+    public List<City> getAll(){
+        List<City> city = new ArrayList<>();
+        cityRepository.findAll().forEach(city::add);
+        return city;
+    }
+
+    public City getByCoordinates(int x, int y){
+        Optional<City> city = getAll()
+                .stream()
+                .filter(currentCity -> Objects.equals(currentCity.getX(),x))
+                .filter(currentCity -> Objects.equals(currentCity.getY(),y))
+                .findFirst();
+        if(city.isPresent()){
+            return city.get();
+        }
+        return null;
     }
 
     public CityDto getById(Long id){

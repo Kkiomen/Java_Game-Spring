@@ -18,7 +18,12 @@ main{
 .map_pos .bottom_coordinates{
     position: absolute;
     bottom: 0px;
-    left: 2.3em;
+    left: 2.5em;
 }
 
-
+.map_pos .owner small{
+    background-color: #44c54b;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+}

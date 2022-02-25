@@ -10,7 +10,9 @@ import java.util.ArrayList;
 @Setter
 public class Column {
     public ArrayList<Chunk> chunksList = new ArrayList<>();
-    public Column(ArrayList<Chunk> chunksList) {
+    public ArrayList<ChunkRender> chunkRenders = new ArrayList<>();
+    public Column(ArrayList<Chunk> chunksList, ArrayList<ChunkRender> chunkRenders) {
         this.chunksList = chunksList;
+        this.chunkRenders = chunkRenders;
     }
 }

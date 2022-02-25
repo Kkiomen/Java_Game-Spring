@@ -40,7 +40,7 @@ public class MapGenerator {
                 chunks.add(choosedChunk);
                 mapChunkService.addChunk(choosedChunk);
             }
-            result.add(new Column(chunks));
+            result.add(new Column(chunks,null));
         }
         return result;
     }

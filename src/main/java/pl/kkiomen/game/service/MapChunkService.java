@@ -3,6 +3,7 @@ package pl.kkiomen.game.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.kkiomen.game.generator.map.Chunks.Chunk;
+import pl.kkiomen.game.generator.map.Chunks.Helper.ChunkRender;
 import pl.kkiomen.game.generator.map.Chunks.Helper.Column;
 import pl.kkiomen.game.generator.map.Chunks.Type.*;
 import pl.kkiomen.game.model.MapChunk;
@@ -15,10 +16,13 @@ import java.util.List;
 public class MapChunkService {
 
     private final MapChunkRepository mapChunkRepository;
+    private final CityService cityService;
+
 
     @Autowired
-    public MapChunkService(MapChunkRepository mapChunkRepository) {
+    public MapChunkService(MapChunkRepository mapChunkRepository, CityService cityService) {
         this.mapChunkRepository = mapChunkRepository;
+        this.cityService = cityService;
     }
 
     public MapChunk addChunk(Chunk chunk){
@@ -42,14 +46,17 @@ public class MapChunkService {
         List<Chunk> getAllChunks = this.findAll();
         ArrayList<Column> result = new ArrayList<>(sizeMap);
         int iterator = 0;
-        ArrayList<Chunk> chunks = new ArrayList<>(sizeMap);
+        ArrayList<ChunkRender> chunks = new ArrayList<>(sizeMap);
         for (Chunk currentChunk : getAllChunks){
             iterator++;
-            chunks.add(currentChunk);
+            ChunkRender renderChunk = new ChunkRender();
+            renderChunk.setChunk(currentChunk);
+            renderChunk.setCity(cityService.getByCoordinates(currentChunk.getX(),currentChunk.getY()));
+            chunks.add(renderChunk);
 
             if(iterator == sizeMap){
                 iterator = 0;
-                result.add(new Column(chunks));
+                result.add(new Column(null,chunks));
                 chunks = new ArrayList<>(sizeMap);
             }
         }
